@@ -1,0 +1,10 @@
+.page {
+    background-color: azure;
+    margin: 0;
+}
+.header {
+    background-color: cornflowerblue;
+    height: 80px;
+    width: 100%;
+    z-index: 1;
+}
