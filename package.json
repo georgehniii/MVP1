@@ -9,7 +9,8 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.1",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "pg": "^8.7.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
@@ -22,5 +23,5 @@
     "url": "https://github.com/georgehniii/MVP1/issues"
   },
   "homepage": "https://github.com/georgehniii/MVP1#readme",
-  "description": ""
+  "description": "This is my first real fullstack project. It should take information from a database and display it on a web page. Some user interface involved."
 }
