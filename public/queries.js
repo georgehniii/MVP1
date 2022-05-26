@@ -70,7 +70,7 @@ const getItemsByCategory = async (req, res) => {
 //have to fix the ry cathces
 const createItem = (req, res) => {
     const {category_id,item,price} = req.body
-
+    console.log("in Create" + req.body);
     pool.query('INSERT INTO items (category_id,item,price) VALUES ($1, $2, $3)', [category_id,item,price], (err, results) => {
         if (err) {
             throw err
