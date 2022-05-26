@@ -56,6 +56,7 @@ $deleteButton.on("click", async () => {
 function pageLoader(data,opt){
     $(".inputs").remove();
     $(".create").remove();
+    $(".form").remove();
     console.log(data);
     for(var i = 0; i < data.length; i++){
         const $infoBox = $(`<div  class='inputs ${JSON.stringify(data[i])}'></div>`);
@@ -68,6 +69,7 @@ function pageLoader(data,opt){
 function pageLoader2(data){
     $(".inputs").remove();
     $(".create").remove();
+    $(".form").remove();
     console.log(data);
     for(var i = 0; i < data.length; i++){
         const $infoBox = $(`<div  class='inputs'></div>`);
@@ -78,6 +80,7 @@ function pageLoader2(data){
 function pageLoader3(data,opt){
     $(".inputs").remove();
     $(".create").remove();
+    $(".form").remove();
     console.log(data);
     for(var i = 0; i < data.length; i++){
         const $infoBox = $(`<div  class='inputs ${JSON.stringify(data[i])}'></div>`);
@@ -89,10 +92,11 @@ function pageLoader3(data,opt){
 
 function inputPage(){
     $(".inputs").remove();
+    $(".form").remove();
     $(".create").remove();
     console.log("Creating add page");
     const $submitFormBtn = $('<button type="button">Submit</button>');
-    const $inputBox = $(`<form class="input" action="/my-handling-form-page" method="post"></form>`);
+    const $inputBox = $(`<form class="form" action="/my-handling-form-page" method="post"></form>`);
     const $catInput = $(`<p class="inputTitle">Category:</p><input id="category" class="inputFeild" name="category">`);
     const $nameInput = $(`<p class="inputTitle">Name:</p><input id="name" class="inputFeild" name="name">`);
     const $priceInput = $(`<p class="inputTitle">Price:</p><input id="price" class="inputFeild" name="price">`);
@@ -153,6 +157,7 @@ async function buttonBuilderDelete(e){
 }
 
 async function submitForm () {
+    console.log($("#category").val());
     try{  
         await $.post('/item', {body: {
             "category_id": $("#category").val(),
