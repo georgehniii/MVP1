@@ -125,9 +125,9 @@ async function buttonBuilderDelete(e){
     console.log(`clicked ${this.textContent}`);
     console.log(`clicked ${this.className}`);
     const dirtyString = this.className;
-    const cleanedObj = dirtyString.slice(7,dirtyString.length)
+    const cleanedObj = dirtyString.slice(7,dirtyString.length);
     const obj = JSON.parse(cleanedObj);
-    console.log(obj);
+    console.log("Deleting " + obj.item_id);
     try{
         const data = await $.delete(`/item/${obj["item_id"]}`);
         console.log("Deleted");
