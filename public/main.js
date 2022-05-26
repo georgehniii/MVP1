@@ -129,7 +129,7 @@ async function buttonBuilderDelete(e){
     const obj = JSON.parse(cleanedObj);
     console.log("Deleting " + obj.item_id);
     try{
-        const data = await $.delete(`/item/${obj["item_id"]}`);
+        const data = await $.delete(`/item/${obj.item_id}`);
         console.log("Deleted");
     }
     catch (error){
