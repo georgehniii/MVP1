@@ -154,7 +154,13 @@ async function buttonBuilderDelete(e){
 
 async function submitForm () {
     try{  
-        await $.ajax({
+        await $.ajax(`/item/${id}`,{type: 'POST', 
+             data: `{
+                "category_id": "${$("#category").value}",
+                "item": "${$("#name").value}",
+                "price": "${$("#price").value}",
+                }`});
+            /*$.ajax({
                 type: "POST",
                 url: "/item",
                 data: `{
@@ -166,7 +172,7 @@ async function submitForm () {
                 console.log(result);
                 },
                 dataType: "json"
-            });
+            });*/
         console.log("Added part");
     }
     catch (error){
