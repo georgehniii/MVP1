@@ -158,7 +158,7 @@ async function buttonBuilderDelete(e){
 
 function submitForm () {
     console.log($("#category").val());  
-        await $.post('/item',{
+        $.post('/item',{
             category_id: $("#category").val(),
             item: $("#name").val(),
             price: $("#price").val(),
