@@ -69,9 +69,9 @@ const getItemsByCategory = async (req, res) => {
 
 //have to fix the ry cathces
 const createItem = (req, res) => {
-    const {category_id,item_name,price} = req.body
+    const {category_id,item,price} = req.body
 
-    pool.query('INSERT INTO items (category_id,item_name,price) VALUES ($1, $2, $3)', [category_id,item_name,price], (err, results) => {
+    pool.query('INSERT INTO items (category_id,item,price) VALUES ($1, $2, $3)', [category_id,item,price], (err, results) => {
         if (err) {
             throw err
         }
@@ -82,11 +82,11 @@ const createItem = (req, res) => {
 
 const updateItem = (req, res) => {
     const id = req.params.id;
-    const {category_id,item_name,price} = req.body
+    const {category_id,item,price} = req.body
     
     pool.query(
-        'UPDATE items SET category_id = $1, item_name = $2, price = $3 WHERE item_id = $4',
-        [category_id,item_name,price], (err, results) => {
+        'UPDATE items SET category_id = $1, item = $2, price = $3 WHERE item_id = $4',
+        [category_id,item,price], (err, results) => {
             if (err) {
                 res.send('Usage: category_id,item_name,price')
                 throw err

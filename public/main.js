@@ -29,16 +29,7 @@ $allButton.on("click", async () => {
     }
 });
 
-$addButton.on("click", async () => {
-    try{
-        const data = await $.get('/items');
-        console.log(data);
-        pageLoader(data,"item");
-    }
-    catch (error){
-        console.err(error);
-    }
-});
+$addButton.on("click", inputPage);
 
 $updateButton.on("click", async () => {
     try{
@@ -64,6 +55,7 @@ $deleteButton.on("click", async () => {
 
 function pageLoader(data,opt){
     $(".inputs").remove();
+    $(".create").remove();
     console.log(data);
     for(var i = 0; i < data.length; i++){
         const $infoBox = $(`<div  class='inputs ${JSON.stringify(data[i])}'></div>`);
@@ -75,6 +67,7 @@ function pageLoader(data,opt){
 
 function pageLoader2(data){
     $(".inputs").remove();
+    $(".create").remove();
     console.log(data);
     for(var i = 0; i < data.length; i++){
         const $infoBox = $(`<div  class='inputs'></div>`);
@@ -84,6 +77,7 @@ function pageLoader2(data){
 }
 function pageLoader3(data,opt){
     $(".inputs").remove();
+    $(".create").remove();
     console.log(data);
     for(var i = 0; i < data.length; i++){
         const $infoBox = $(`<div  class='inputs ${JSON.stringify(data[i])}'></div>`);
@@ -93,6 +87,38 @@ function pageLoader3(data,opt){
     }
 }
 
+function inputPage(){
+    $(".inputs").remove();
+    const $inputBox = $(`<form class="input" action="/my-handling-form-page" method="post">
+        <input id="category" class="inputFeild" name="category">
+        <input id="name" class="inputFeild" name="name">
+        <input id="price" class="inputFeild" name="price">
+    </form>`);
+        $inputBox.text(data[i][opt]);
+        $inputBox.appendTo($inputContainer);
+        $inputBox.submit(submitForm);
+    const submitForm = async () => {
+        try{  
+            await $.ajax({
+                    type: "POST",
+                    url: "/item",
+                    data: `{
+                    "category_id": "${$("#category").value}",
+                    "item": "${$("#name").value}",
+                    "price": "${$("#price").value}",
+                    }`,
+                    success: function (result) {
+                    console.log(result);
+                    },
+                    dataType: "json"
+                });
+            console.log("Added part");
+        }
+        catch (error){
+            console.err(error);
+        }
+    }
+}
 async function buttonBuilder(e){
     console.log(`building button`);
     console.log(`clicked ${this.textContent}`);
@@ -140,3 +166,4 @@ async function buttonBuilderDelete(e){
         console.err(error);
     }
 }
+
