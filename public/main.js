@@ -155,9 +155,9 @@ async function buttonBuilderDelete(e){
 async function submitForm () {
     try{  
         await $.post('/item', {body: {
-            "category_id": $("#category").value,
-            "item": $("#name").value,
-            "price": $("#price").value,
+            "category_id": $("#category").val(),
+            "item": $("#name").val(),
+            "price": $("#price").val(),
             } });
         /*$.ajax(`/item${id}`,{type: 'POST', 
              data: `{
