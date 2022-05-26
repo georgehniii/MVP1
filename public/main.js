@@ -158,7 +158,7 @@ async function buttonBuilderDelete(e){
 
 function submitForm () {
     console.log($("#category").val());  
-        $.post('/item',{
+        $.post('https://aqueous-river-55015.herokuapp.com/item',{
             category_id: $("#category").val(),
             item: $("#name").val(),
             price: $("#price").val(),
