@@ -103,27 +103,6 @@ function inputPage(){
     $submitFormBtn.appendTo($inputBox);
     $inputBox.appendTo($inputContainer);
     $submitFormBtn.click(submitForm);
-    const submitForm = async () => {
-        try{  
-            await $.ajax({
-                    type: "POST",
-                    url: "/item",
-                    data: `{
-                    "category_id": "${$("#category").value}",
-                    "item": "${$("#name").value}",
-                    "price": "${$("#price").value}",
-                    }`,
-                    success: function (result) {
-                    console.log(result);
-                    },
-                    dataType: "json"
-                });
-            console.log("Added part");
-        }
-        catch (error){
-            console.err(error);
-        }
-    }
 }
 async function buttonBuilder(e){
     console.log(`building button`);
@@ -173,3 +152,24 @@ async function buttonBuilderDelete(e){
     }
 }
 
+async function submitForm () {
+    try{  
+        await $.ajax({
+                type: "POST",
+                url: "/item",
+                data: `{
+                "category_id": "${$("#category").value}",
+                "item": "${$("#name").value}",
+                "price": "${$("#price").value}",
+                }`,
+                success: function (result) {
+                console.log(result);
+                },
+                dataType: "json"
+            });
+        console.log("Added part");
+    }
+    catch (error){
+        console.err(error);
+    }
+}
