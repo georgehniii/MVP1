@@ -96,7 +96,7 @@ function inputPage(){
         <input id="name" class="inputFeild" name="name">
         <input id="price" class="inputFeild" name="price">
     </form>`);
-        $inputBox.text(data[i][opt]);
+        $inputBox.text("Category is an int. Name is a string. Price is a float. Fill out all fields before submiting.");
         $inputBox.appendTo($inputContainer);
         $inputBox.submit(submitForm);
     const submitForm = async () => {
