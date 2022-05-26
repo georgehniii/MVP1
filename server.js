@@ -14,9 +14,9 @@ app.get('/items', db.getItems);
 app.get('/item/:id', db.getItemById);
 app.get('/category', db.getCategories);
 app.get('/category/:id',db.getItemsByCategory);
-//app.post('/items', db.createItem);
-//app.patch('/items/:id', db.updateItem);
-//app.delete('/items/:id', db.deleteItem);
+app.post('/items', db.createItem);
+app.patch('/item/:id', db.updateItem);
+app.delete('/item/:id', db.deleteItem);
 app.use((req,res) => {
     res.status(404).send("Not Found");
 });

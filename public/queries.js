@@ -66,7 +66,7 @@ const getItemsByCategory = async (req, res) => {
         console.log(error);
     }
 }
-/*
+
 //have to fix the ry cathces
 const createItem = (req, res) => {
     const {category_id,item_name,price} = req.body
@@ -111,7 +111,6 @@ const deleteItem = (req, res) => {
 }
 
 
-*/
 
 
 
@@ -121,10 +120,8 @@ module.exports = {
     getItems,
     getItemById,
     getItemsByCategory,
-    getCategories
-    /*
+    getCategories,
     createItem,
     updateItem,
     deleteItem
-    */
   }

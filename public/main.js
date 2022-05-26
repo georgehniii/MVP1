@@ -1,7 +1,8 @@
-//const { client_encoding } = require("pg/lib/defaults");
-
 let $homeButton = $("#home");
 let $allButton = $("#all");
+let $addButton = $("#add");
+let $updateButton = $("#update");
+let $deleteButton = $("#delete");
 let $inputContainer = $("#inputContainer");
 const start = async () => {
     try{
@@ -27,6 +28,36 @@ $allButton.on("click", async () => {
         console.err(error);
     }
 });
+$addButton.on("click", async () => {
+    try{
+        const data = await $.get('/items');
+        console.log(data);
+        pageLoader(data,"item");
+    }
+    catch (error){
+        console.err(error);
+    }
+});
+$updateButton.on("click", async () => {
+    try{
+        const data = await $.get('/items');
+        console.log(data);
+        pageLoader(data,"item");
+    }
+    catch (error){
+        console.err(error);
+    }
+});
+$deleteButton.on("click", async () => {
+    try{
+        const data = await $.get('/items');
+        console.log(data);
+        pageLoader3(data,"item");
+    }
+    catch (error){
+        console.err(error);
+    }
+});
 
 function pageLoader(data,opt){
     $(".inputs").remove();
@@ -45,6 +76,16 @@ function pageLoader2(data){
     for(var i = 0; i < data.length; i++){
         const $infoBox = $(`<div  class='inputs'></div>`);
         $infoBox.text(`${data[i]["item"]} \nPrice: $${data[i]["price"]}`);
+        $infoBox.appendTo($inputContainer);
+    }
+}
+function pageLoader3(data,opt){
+    $(".inputs").remove();
+    console.log(data);
+    for(var i = 0; i < data.length; i++){
+        const $infoBox = $(`<div  class='inputs ${JSON.stringify(data[i])}'></div>`);
+        $infoBox.click(buttonBuilderDelete);
+        $infoBox.text(data[i][opt]);
         $infoBox.appendTo($inputContainer);
     }
 }
@@ -73,6 +114,23 @@ async function buttonBuilder(e){
         else{
             pageLoader2(data);
         }
+    }
+    catch (error){
+        console.err(error);
+    }
+}
+
+async function buttonBuilderDelete(e){
+    console.log(`building button`);
+    console.log(`clicked ${this.textContent}`);
+    console.log(`clicked ${this.className}`);
+    const dirtyString = this.className;
+    const cleanedObj = dirtyString.slice(7,dirtyString.length)
+    const obj = JSON.parse(cleanedObj);
+    console.log(obj);
+    try{
+        const data = await $.delete(`/item/${obj["item_id"]}`);
+        console.log("Deleted");
     }
     catch (error){
         console.err(error);
