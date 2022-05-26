@@ -91,16 +91,18 @@ function inputPage(){
     $(".inputs").remove();
     $(".create").remove();
     console.log("Creating add page");
+    const $submitFormBtn = $('<button type="button">Submit</button>');
     const $inputBox = $(`<form class="input" action="/my-handling-form-page" method="post"></form>`);
     const $catInput = $(`<p class="inputTitle">Category:</p><input id="category" class="inputFeild" name="category">`);
-    const $nameInput = $(`<p class="inputTitle">Name:</p><<input id="name" class="inputFeild" name="name">`);
-    const $priceInput = $(`<p class="inputTitle">Price:</p><<input id="price" class="inputFeild" name="price">`);
+    const $nameInput = $(`<p class="inputTitle">Name:</p><input id="name" class="inputFeild" name="name">`);
+    const $priceInput = $(`<p class="inputTitle">Price:</p><input id="price" class="inputFeild" name="price">`);
     $inputBox.text("Category is an int. Name is a string. Price is a float. Fill out all fields before submiting.");
     $catInput.appendTo($inputBox);
     $nameInput.appendTo($inputBox);
     $priceInput.appendTo($inputBox);
+    $submitFormBtn.appendTo($inputBox);
     $inputBox.appendTo($inputContainer);
-    $inputBox.submit(submitForm);
+    $submitFormBtn.click(submitForm);
     const submitForm = async () => {
         try{  
             await $.ajax({
