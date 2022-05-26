@@ -89,6 +89,8 @@ function pageLoader3(data,opt){
 
 function inputPage(){
     $(".inputs").remove();
+    $(".create").remove();
+    console.log("Creating add page");
     const $inputBox = $(`<form class="input" action="/my-handling-form-page" method="post">
         <input id="category" class="inputFeild" name="category">
         <input id="name" class="inputFeild" name="name">
