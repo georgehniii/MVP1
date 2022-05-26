@@ -28,6 +28,7 @@ $allButton.on("click", async () => {
         console.err(error);
     }
 });
+
 $addButton.on("click", async () => {
     try{
         const data = await $.get('/items');
@@ -38,6 +39,7 @@ $addButton.on("click", async () => {
         console.err(error);
     }
 });
+
 $updateButton.on("click", async () => {
     try{
         const data = await $.get('/items');
@@ -48,6 +50,7 @@ $updateButton.on("click", async () => {
         console.err(error);
     }
 });
+
 $deleteButton.on("click", async () => {
     try{
         const data = await $.get('/items');
@@ -121,7 +124,7 @@ async function buttonBuilder(e){
 }
 
 async function buttonBuilderDelete(e){
-    console.log(`building button`);
+    console.log(`building delete button`);
     console.log(`clicked ${this.textContent}`);
     console.log(`clicked ${this.className}`);
     const dirtyString = this.className;
@@ -130,7 +133,7 @@ async function buttonBuilderDelete(e){
     let id = obj.item_id;
     console.log("Deleting " + obj.item_id);
     try{
-        const data = await $.delete(`/item/${id}`);
+        await $.delete(`/item/${id}`);
         console.log("Deleted");
     }
     catch (error){
