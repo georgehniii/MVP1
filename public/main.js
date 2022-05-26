@@ -5,7 +5,7 @@ let $allButton = $("#all");
 let $inputContainer = $("#inputContainer");
 const start = async () => {
     try{
-        const data = await $.get('http://localhost:5555/category');
+        const data = await $.get('/category');
         console.log(data);
         pageLoader(data,"category");
     }
@@ -19,7 +19,7 @@ $homeButton.on("click", start);
 
 $allButton.on("click", async () => {
     try{
-        const data = await $.get('http://localhost:5555/items');
+        const data = await $.get('/items');
         console.log(data);
         pageLoader(data,"item");
     }
