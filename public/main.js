@@ -156,9 +156,8 @@ async function buttonBuilderDelete(e){
     }
 }
 
-async function submitForm () {
-    console.log($("#category").val());
-    try{  
+function submitForm () {
+    console.log($("#category").val());  
         await $.post('/item',{
             category_id: $("#category").val(),
             item: $("#name").val(),
@@ -184,8 +183,4 @@ async function submitForm () {
                 dataType: "json"
             });*/
         console.log("Added part");
-    }
-    catch (error){
-        console.err(error);
-    }
 }
