@@ -133,7 +133,7 @@ async function buttonBuilderDelete(e){
     let id = obj.item_id;
     console.log("Deleting " + obj.item_id);
     try{
-        await $.delete(`/item/${id}`);
+        await $.ajax(`/item/${id}`,{type: 'DELETE'});
         console.log("Deleted");
     }
     catch (error){
