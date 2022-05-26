@@ -98,7 +98,7 @@ const updateItem = (req, res) => {
 
 const deleteItem = (req, res) => {
    const id = req.params.id
-    
+    console.log("Last id " + id);
     
     pool.query(
         `DELETE FROM items WHERE item_id = ${id}`, (err, results) => {
