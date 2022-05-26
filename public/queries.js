@@ -67,34 +67,31 @@ const getItemsByCategory = async (req, res) => {
     }
 }
 
-//have to fix the ry cathces
-const createItem = (req, res) => {
+//have to fix the try cathces
+const createItem = async (req, res) => {
     console.log("in create item just before taking in req.body");
     const {category_id,item,price} = req.body
-    console.log("in Create" + req.body);
-    pool.query('INSERT INTO items (category_id,item,price) VALUES ($1, $2, $3)', [category_id,item,price], (err, results) => {
-        if (err) {
-            throw err
-        }
-        res.status(200).send('Item added')
-
-    })
+    console.log(req.body);
+    try{
+        pool.query('INSERT INTO items (category_id,item,price) VALUES ($1, $2, $3)', [category_id,item,price])
+    }
+    catch (error){
+        console.log(error);
+    }
 }
 
-const updateItem = (req, res) => {
+const updateItem = async (req, res) => {
     const id = req.params.id;
-    const {category_id,item,price} = req.body
-    
-    pool.query(
-        'UPDATE items SET category_id = $1, item = $2, price = $3 WHERE item_id = $4',
-        [category_id,item,price], (err, results) => {
-            if (err) {
-                res.send('Usage: category_id,item_name,price')
-                throw err
-              }
-              res.status(200).send(`Item modified with ID: ${id}`)
-        }
-    )
+    const {category_id,item,price} = req.body;
+    console.log("in update query");
+    console.log(id);
+    try{
+        pool.query(
+            'UPDATE items SET category_id = $1, item = $2, price = $3 WHERE item_id = $4', [category_id,item,price,id]);
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
 const deleteItem = (req, res) => {
