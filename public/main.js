@@ -65,7 +65,7 @@ async function buttonBuilder(e){
     }
     console.log(opt);
     try{
-        const data = await $.get(`http://localhost:5555/${opt}/${obj[opt+"_id"]}`);
+        const data = await $.get(`/${opt}/${obj[opt+"_id"]}`);
         console.log("You clicked it");
         if(opt == "category"){
             pageLoader(data,"item");
