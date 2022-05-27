@@ -73,7 +73,7 @@ function pageLoader2(data){
     console.log(data);
     for(var i = 0; i < data.length; i++){
         const $infoBox = $(`<div  class='inputs'></div>`);
-        $infoBox.text(`${data[i]["item"]} \nPrice: $${data[i]["price"]}`);
+        $infoBox.text(`${data[i]["item"]} \nPrice: $${data[i]["price"]}\nQty: ${data[i]["qty"]}`);
         $infoBox.appendTo($inputContainer);
     }
 }
@@ -100,10 +100,12 @@ function inputPage(){
     const $catInput = $(`<p class="inputTitle">Category:</p><input id="category" class="inputFeild" name="category">`);
     const $nameInput = $(`<p class="inputTitle">Name:</p><input id="name" class="inputFeild" name="name">`);
     const $priceInput = $(`<p class="inputTitle">Price:</p><input id="price" class="inputFeild" name="price">`);
+    const $qtyInput = $(`<p class="inputTitle">Qty:</p><input id="qty" class="inputFeild" name="qty">`);
     $inputBox.text("Category is an int. Name is a string. Price is a float. Fill out all fields before submiting.");
     $catInput.appendTo($inputBox);
     $nameInput.appendTo($inputBox);
     $priceInput.appendTo($inputBox);
+    $qtyInput.appendTo($inputBox);
     $submitFormBtn.appendTo($inputBox);
     $inputBox.appendTo($inputContainer);
     $submitFormBtn.click(submitForm);
@@ -139,13 +141,19 @@ async function updateButtonBuilder(){
     const $catInput = $(`<p class="inputTitle">Category:</p><input id="category" class="inputFeild" name="category">`);
     const $nameInput = $(`<p class="inputTitle">Name:</p><input id="name" class="inputFeild" name="name">`);
     const $priceInput = $(`<p class="inputTitle">Price:</p><input id="price" class="inputFeild" name="price">`);
+    const $qtyInput = $(`<p class="inputTitle">Qty:</p><input id="qty" class="inputFeild" name="qty">`);
     //console.log(this.textContent);
-    $inputBox.text(`Updating: ${this.textContent}\n Category is an int. Name is a string. Price is a float. Fill out all fields before submiting.`);
+    $inputBox.text(`Updating: ${this.textContent}\n Category is an int. Name is a string. Price is a float. Qty is an int. Fill out all fields before submiting.`);
     $idInput.val(obj.item_id);
+    $catInput.val(obj.category_id);
+    $nameInput.val(obj.item);
+    $priceInput.val(obj.price);
+    $qtyInput.val(obj.qty);
     $idInput.appendTo($inputBox);
     $catInput.appendTo($inputBox);
     $nameInput.appendTo($inputBox);
     $priceInput.appendTo($inputBox);
+    $qtyInput.appendTo($inputBox);
     $submitFormBtn.appendTo($inputBox);
     $inputBox.appendTo($inputContainer);
     $submitFormBtn.click(submitFormUpdate);
@@ -193,6 +201,18 @@ async function buttonBuilderDelete(e){
     try{
         await $.ajax(`/item/${id}`,{type: 'DELETE'});
         console.log("Deleted");
+        reloadafterDelete();
+    }
+    catch (error){
+        console.err(error);
+    }
+}
+
+async function reloadafterDelete(){
+    try{
+        const data = await $.get('/items');
+        console.log(data);
+        pageLoader3(data,"item");
     }
     catch (error){
         console.err(error);
@@ -206,10 +226,12 @@ async function submitForm () {
     const cat = parseInt($("#category").val());
     const inputName =  $("#name").val();
     const price = parseFloat($("#price").val());
+    const qtyInput = parseFloat($("#qty").val());
     const obj = {
         category_id: cat,
         item: inputName,
-        price: price
+        price: price,
+        qty: qtyInput
     };
         const response = await fetch('/item',{
         method: 'POST',
@@ -228,17 +250,21 @@ async function submitFormUpdate () {
     console.log(typeof $("#category").val()); 
     console.log(typeof $("#name").val()); 
     console.log(typeof $("#price").val());
+    console.log(typeof $("#qty").val());
     const id = $("#id").val(); 
     console.log(typeof id);
     const cat = parseInt($("#category").val());
     const inputName =  $("#name").val();
     const price = parseFloat($("#price").val());
+    const qtyInput = parseFloat($("#qty").val());
     const obj = {
         category_id: cat,
         item: inputName,
-        price: price
+        price: price,
+        qty: qtyInput
     };
         try{
+            console.log("Updating part");
             const response = await fetch(`/item/${id}`,{
             method: 'PATCH',
             headers: {
@@ -248,9 +274,20 @@ async function submitFormUpdate () {
             })
             .then(res => {res.json()})
             .then(data => console.log(data));
-            console.log("Updating part");
+            //.then(id => showItemChange); 
         }
         catch (error){
             console.err(error);
         }
+    showItemChange(id);
+}
+async function showItemChange(id){
+    try{
+        const data = await $.get(`/item/${id}`);
+        console.log(data);
+        pageLoader2(data);
+    }
+    catch (error){
+        console.err(error);
+    }
 }
