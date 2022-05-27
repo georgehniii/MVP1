@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 body {
     margin: 0;
@@ -14,11 +15,12 @@ body {
     flex-direction: column;
    
     padding: 0;
-    background-color: cornflowerblue;
+    background-color: rgb(119, 160, 236);
     width: 100%;
     z-index: 1;
 }
 .title {
+    text-align: center;
     margin: 10px 0 10px 20px;
 } 
 .navBar {
@@ -26,16 +28,19 @@ body {
     flex-direction: row;
     width: 100%;
     padding: 1%;
-    margin-left: 15px
+    margin-left: 7px;
 }
 .btn{
     flex: 0 1 20%;
+    border-radius: 8px;
     border: 2px solid black;
     margin-right: 10px;
     text-align: center;
+    background-color: rgb(115, 158, 238);
 }
 .btn:hover {
     cursor: pointer;
+    background-color: aqua;
 }
 #inputContainer {
     display: flex;
@@ -47,8 +52,14 @@ body {
 .inputs {
     text-align: center;
     flex: 0 1 30%;
-    border-radius: 2%;
+    height: 5rem;
+    padding-top: 1rem;
+    border-radius: 8px;
     margin-right: 3%;
     margin-top: 2%;
-    background-color: rgb(58, 119, 173);
+    background-color: rgb(115, 158, 238);
+}
+.inputs:hover {
+    cursor: pointer;
+    background-color: aqua;
 }
