@@ -81,13 +81,15 @@ const createItem = async (req, res) => {
 }
 
 const updateItem = async (req, res) => {
-    const id = req.params.id;
-    const {category_id,item,price} = req.body;
     console.log("in update query");
+    const id = req.params.id;
+    const {category_id,item,price,qty} = req.body;
+    
     console.log(id);
     try{
         pool.query(
-            'UPDATE items SET category_id = $1, item = $2, price = $3 WHERE item_id = $4', [category_id,item,price,id]);
+            'UPDATE items SET category_id = $1, item = $2, price = $3, qty = $4 WHERE item_id = $5', [category_id,item,price,qty,id]);
+            console.log("fully updated");
     }
     catch (error) {
         console.log(error);

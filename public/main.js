@@ -72,8 +72,7 @@ function pageLoader2(data){
     $(".form").remove();
     console.log(data);
     for(var i = 0; i < data.length; i++){
-        const $infoBox = $(`<div  class='inputs'></div>`);
-        $infoBox.text(`${data[i]["item"]} \nPrice: $${data[i]["price"]}\nQty: ${data[i]["qty"]}`);
+        const $infoBox = $(`<div  class='inputs'>${data[i]["item"]}<br> Price: $${data[i]["price"]}<br>Qty: ${data[i]["qty"]}</div>`);
         $infoBox.appendTo($inputContainer);
     }
 }
@@ -252,17 +251,19 @@ async function submitFormUpdate () {
     console.log(typeof $("#price").val());
     console.log(typeof $("#qty").val());
     const id = $("#id").val(); 
-    console.log(typeof id);
+    console.log(id);
     const cat = parseInt($("#category").val());
     const inputName =  $("#name").val();
     const price = parseFloat($("#price").val());
-    const qtyInput = parseFloat($("#qty").val());
+    const qtyInput = parseInt($("#qty").val());
     const obj = {
         category_id: cat,
         item: inputName,
         price: price,
         qty: qtyInput
     };
+    console.log(`Submiting update.`);
+    console.log(obj);
         try{
             console.log("Updating part");
             const response = await fetch(`/item/${id}`,{
